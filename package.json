@@ -1,0 +1,34 @@
+{
+  "name": "wpi-opportunity-search",
+  "version": "1.0.0",
+  "description": "An easy tool to streamline job posting and search at WPI",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon index.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hzgand/wpi-opportunity-search.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hzgand/wpi-opportunity-search/issues"
+  },
+  "homepage": "https://github.com/hzgand/wpi-opportunity-search#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "express": "^4.18.2",
+    "express-jwt": "^8.3.0",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^6.8.3"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0",
+    "nodemon": "^2.0.20"
+  }
+}
