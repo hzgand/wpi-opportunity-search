@@ -50,22 +50,26 @@ export default function SearchBar(props) {
 
                     &nbsp;&nbsp;&nbsp;
 
-                    <Box sx={{display: 'flex', flexDirection: 'row', margin: 'auto', width: 0.5}}>
+                    <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                         <TextField
                             id="input-hours-gte"
                             placeholder="min"
                             variant="outlined"
                             size="small"
-                            sx={{width: 0.25}}
+                            sx={{ width: 0.25 }}
                             onChange={props.onMinHourUpdate}
                         />
-                        <Typography sx={{color: 'black', height: 0.5, paddingTop: "0.5rem"}}>&nbsp;&lt; Hours/Week &lt;&nbsp;</Typography>
+                        <Typography
+                            sx={{ color: 'black', height: 0.5 }}
+                            variant="body1"
+                            component="h4">
+                            &nbsp;&lt; Hours / Week &lt;&nbsp;</Typography>
                         <TextField
                             id="input-hours-gte"
                             placeholder="max"
                             variant="outlined"
                             size="small"
-                            sx={{width: 0.25}}
+                            sx={{ width: 0.25 }}
                             onChange={props.onMaxHourUpdate}
                         />
                     </Box>

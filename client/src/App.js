@@ -20,8 +20,8 @@ function App() {
     let searchParams = {};
     if(searchString) searchParams["q"] = searchString;
     if(searchJobType && searchJobType !== "All") searchParams["jobtype"] = searchJobType;
-    if(searchMinHour) searchParams['hoursgte'] = searchMinHour;
-    if(searchMaxHour) searchParams['hourslte'] = searchMaxHour;
+    if(searchMinHour && searchMinHour !== -1) searchParams['hoursgte'] = searchMinHour;
+    if(searchMaxHour && searchMaxHour !== -1) searchParams['hourslte'] = searchMaxHour;
     setSearchParameters(searchParams);
   };
 
