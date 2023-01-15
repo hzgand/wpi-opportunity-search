@@ -16,12 +16,28 @@ export default function ImgMediaCard(props) {
   return (
     <Card sx={{ width: 0.65, margin: "auto" }}>
       <Box sx={{ display: "flex", flexDirection: "row" }}>
-        <CardHeader avatar={<Avatar aria-label="recipe">AI</Avatar>} />
+        <CardHeader
+          avatar={
+            <Avatar
+              sx={{ fontSize: "2rem", width: 100, height: 100 }}
+              aria-label="recipe"
+            >
+              AI
+            </Avatar>
+          }
+        />
 
-        <CardContent>
-          <Box>
+        <CardContent sx={{ width: 1 }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyItems: "space-evenly",
+              width: 1,
+            }}
+          >
             <Box>
-              <Typography gutterBottom varriant="h5" component="h2">
+              <Typography gutterBottom variant="h5" component="h2">
                 {props.job.positionTitle}
               </Typography>
             </Box>
@@ -29,7 +45,6 @@ export default function ImgMediaCard(props) {
               sx={{
                 display: "flex",
                 flexDirection: "row",
-                justifyContent: "space-evenly",
               }}
             >
               <Box
@@ -37,19 +52,22 @@ export default function ImgMediaCard(props) {
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-evenly",
+                  paddingRight: "10rem",
                 }}
               >
                 <Typography variant="body2" color="textSecondary" component="p">
                   {props.job.department}
                 </Typography>
-                <Typography>{props.job.location}</Typography>
-                <Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
+                  {props.job.location}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
                   {props.job.hoursPerWeek}{" "}
                   {props.job.hoursPerWeek === 1 ? "hr/week" : "hrs/week"}
                 </Typography>
               </Box>
               <Box>
-                <Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
                   <Box sx={{ display: "flex", flexDirection: "row" }}>
                     <AssuredWorkloadIcon />
                     {props.job.federalFunding
@@ -57,7 +75,7 @@ export default function ImgMediaCard(props) {
                       : "Work Study Not Required"}
                   </Box>
                 </Typography>
-                <Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
                   {" "}
                   <Box sx={{ display: "flex", flexDirection: "row" }}>
                     <CalendarMonthIcon
@@ -66,7 +84,7 @@ export default function ImgMediaCard(props) {
                     {props.job.jobType}
                   </Box>
                 </Typography>
-                <Typography>
+                <Typography variant="body2" color="textSecondary" component="p">
                   <Box sx={{ display: "flex", flexDirection: "row" }}>
                     <EmailIcon sx={{ paddingRight: "0.1rem" }}></EmailIcon>
                     {props.job.email}
