@@ -11,15 +11,35 @@ import SearchBar from "./app_components/NavBar";
 function App() {
   const [open, setOpen] = React.useState(false);
   const [searchString, setSearchString] = React.useState("");
-  const [finalSearch, setFinalSearch] = React.useState("");
+  const [searchJobType, setSearchJobType] = React.useState("");
+  const [searchMinHour, setSearchMinHour] = React.useState(-1);
+  const [searchMaxHour, setSearchMaxHour] = React.useState(-1);
+  const [searchParameters, setSearchParameters] = React.useState({});
 
   const onSearchSubmit = () => {
-    setFinalSearch(searchString);
+    let searchParams = {};
+    if(searchString) searchParams["q"] = searchString;
+    if(searchJobType && searchJobType !== "All") searchParams["jobtype"] = searchJobType;
+    if(searchMinHour) searchParams['hoursgte'] = searchMinHour;
+    if(searchMaxHour) searchParams['hourslte'] = searchMaxHour;
+    setSearchParameters(searchParams);
   };
 
   const onSearchUpdate = (e) => {
     setSearchString(e.target.value);
   };
+
+  const onJobTypeUpdate = (e) => {
+    setSearchJobType(e.target.value);
+  }
+
+  const onMinHourUpdate = (e) => {
+    setSearchMinHour(e.target.value)
+  }
+
+  const onMaxHourUpdate = (e) => {
+    setSearchMaxHour(e.target.value)
+  }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -34,9 +54,12 @@ function App() {
       <Box>
         <SearchBar
           onSearchUpdate={onSearchUpdate}
+          onJobTypeUpdate={onJobTypeUpdate}
+          onMinHourUpdate={onMinHourUpdate}
+          onMaxHourUpdate={onMaxHourUpdate}
           onSearchSubmit={onSearchSubmit}
         />
-        <CardList searchString={finalSearch} />
+        <CardList searchParameters={searchParameters} />
         <Fab
           color="primary"
           aria-label="add"

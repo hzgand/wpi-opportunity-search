@@ -5,6 +5,10 @@ import Box from "@mui/material/Box";
 import ListItem from "@mui/material/ListItem";
 import LinearProgress from "@mui/material/LinearProgress";
 
+const toQueryString = (searchParameters) => {
+  return new URLSearchParams(searchParameters).toString();
+}
+
 class CardList extends React.Component {
   constructor() {
     super();
@@ -21,15 +25,15 @@ class CardList extends React.Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     return (
-      nextProps.searchString !== this.props.searchString ||
+      JSON.stringify(nextProps.searchParameters) !== JSON.stringify(this.props.searchParameters) ||
       nextState !== this.state
     );
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.searchString !== this.props.searchString) {
+    if (JSON.stringify(prevProps.searchParameters) !== JSON.stringify(this.props.searchParameters)) {
       this.setState({ jobs: [], doneLoading: false });
-      fetch(`http://localhost:3000/api/jobs?q=${this.props.searchString}`)
+      fetch(`http://localhost:3000/api/jobs?${toQueryString(this.props.searchParameters)}`)
         .then((response) => response.json())
         .then((data) => {
           this.setState({ jobs: data, doneLoading: true });
