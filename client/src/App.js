@@ -5,6 +5,7 @@ import JobCard from "./app_components/JobCard";
 import CardHeaderExample from "./app_components/CardHeaderExample";
 import JobCardNew from "./app_components/JobCardNew";
 import CardList from "./app_components/CardList";
+import AppBarAndSearch from "./app_components/AppBarAndSearch";
 
 const testJob = {
   _id: "63c34bfc748a33ce2823a7af",
@@ -27,6 +28,7 @@ const testJob = {
 function App() {
   return (
     <div className="App">
+      <AppBarAndSearch />
       <CardList />
     </div>
   );
