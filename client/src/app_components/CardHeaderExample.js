@@ -62,7 +62,7 @@ export default function ImgMediaCard(props) {
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "space-evenly",
-                    paddingRight: "10rem",
+                    width: 0.5
                   }}
                 >
                   <Typography
