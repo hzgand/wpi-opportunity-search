@@ -32,7 +32,7 @@ export default function ImgMediaCard(props) {
                 sx={{ fontSize: "2rem", width: 100, height: 100 }}
                 aria-label="recipe"
               >
-                AI
+                {(props.job.positionTitle.match(/\b([A-Z])/g) ? props.job.positionTitle.match(/\b([A-Z])/g).join("") : "?").substring(0, 3)}
               </Avatar>
             }
           />
