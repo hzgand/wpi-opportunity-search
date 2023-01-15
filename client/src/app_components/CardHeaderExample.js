@@ -15,16 +15,40 @@ import CardActionArea from "@mui/material/CardActionArea";
 import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import ApartmentIcon from "@mui/icons-material/Apartment";
-import WbSunnyIcon from '@mui/icons-material/WbSunny';
+import WbSunnyIcon from "@mui/icons-material/WbSunny";
+import Dialog from "@mui/material/Dialog";
+import ListItemText from "@mui/material/ListItemText";
+import ListItem from "@mui/material/ListItem";
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import CloseIcon from "@mui/icons-material/Close";
+import Slide from "@mui/material/Slide";
+import Button from "@mui/material/Button";
 
 const config = {
   iconPadding: "0.5rem",
 };
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
 export default function ImgMediaCard(props) {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <Card sx={{ width: 0.6, margin: "auto" }}>
-      <CardActionArea>
+      <CardActionArea onClick={handleClickOpen}>
         <Box sx={{ display: "flex", flexDirection: "row" }}>
           <CardHeader
             avatar={
@@ -32,7 +56,10 @@ export default function ImgMediaCard(props) {
                 sx={{ fontSize: "2rem", width: 100, height: 100 }}
                 aria-label="recipe"
               >
-                {(props.job.positionTitle.match(/\b([A-Z])/g) ? props.job.positionTitle.match(/\b([A-Z])/g).join("") : "?").substring(0, 3)}
+                {(props.job.positionTitle.match(/\b([A-Z])/g)
+                  ? props.job.positionTitle.match(/\b([A-Z])/g).join("")
+                  : "?"
+                ).substring(0, 3)}
               </Avatar>
             }
           />
@@ -62,7 +89,7 @@ export default function ImgMediaCard(props) {
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "space-evenly",
-                    width: 0.5
+                    width: 0.5,
                   }}
                 >
                   <Typography
@@ -109,11 +136,16 @@ export default function ImgMediaCard(props) {
                     component="p"
                   >
                     <Box>
-                      {props.job.federalFunding
-                        ? <Box sx={{ display: "flex", flexDirection: "row" }}><AssuredWorkloadIcon
-                          sx={{ paddingRight: config.iconPadding }}
-                        /> Federal Work Study Required</Box>
-                        : ""}
+                      {props.job.federalFunding ? (
+                        <Box sx={{ display: "flex", flexDirection: "row" }}>
+                          <AssuredWorkloadIcon
+                            sx={{ paddingRight: config.iconPadding }}
+                          />{" "}
+                          Federal Work Study Required
+                        </Box>
+                      ) : (
+                        ""
+                      )}
                     </Box>
                   </Typography>
                   <Typography
@@ -123,13 +155,21 @@ export default function ImgMediaCard(props) {
                   >
                     {" "}
                     <Box>
-                      {props.job.jobType === "Summer"
-                        ? <Box sx={{ display: "flex", flexDirection: "row" }}><WbSunnyIcon
-                          sx={{ paddingRight: config.iconPadding }}
-                        /> Summer</Box>
-                        : <Box sx={{ display: "flex", flexDirection: "row" }}><CalendarMonthIcon
-                        sx={{ paddingRight: config.iconPadding }}
-                      /> Academic Year</Box>}
+                      {props.job.jobType === "Summer" ? (
+                        <Box sx={{ display: "flex", flexDirection: "row" }}>
+                          <WbSunnyIcon
+                            sx={{ paddingRight: config.iconPadding }}
+                          />{" "}
+                          Summer
+                        </Box>
+                      ) : (
+                        <Box sx={{ display: "flex", flexDirection: "row" }}>
+                          <CalendarMonthIcon
+                            sx={{ paddingRight: config.iconPadding }}
+                          />{" "}
+                          Academic Year
+                        </Box>
+                      )}
                     </Box>
                   </Typography>
                   <Typography
@@ -151,6 +191,92 @@ export default function ImgMediaCard(props) {
           </CardContent>
         </Box>
       </CardActionArea>
+      {/* Dialog */}
+      <Dialog
+        fullScreen
+        open={open}
+        onClose={handleClose}
+        TransitionComponent={Transition}
+      >
+        <AppBar sx={{ position: "relative" }}>
+          <Toolbar>
+            <IconButton
+              edge="start"
+              color="inherit"
+              onClick={handleClose}
+              aria-label="close"
+            >
+              <CloseIcon />
+            </IconButton>
+            <Typography
+              sx={{ ml: 2, flex: 1 }}
+              variant="h6"
+              component="div"
+            ></Typography>
+          </Toolbar>
+        </AppBar>
+        <List>
+          <ListItem>
+            <Typography variant="h4" component="h4">
+              {props.job.positionTitle}
+            </Typography>
+          </ListItem>
+          <ListItem>
+            <ListItemText
+              primary={props.job.jobType}
+              secondary="Employment Period"
+            />
+          </ListItem>
+          <ListItem>
+            <ListItemText
+              primary={props.job.department}
+              secondary="Department"
+            />
+          </ListItem>
+          <ListItem>
+            <ListItemText primary={props.job.location} secondary="Location" />
+          </ListItem>
+          <ListItem>
+            <ListItemText
+              primary={props.job.studentsRequired}
+              secondary="# of Students Required"
+            />
+          </ListItem>
+          <ListItem>
+            <ListItemText
+              primary={props.job.hoursPerWeek}
+              secondary="Hours Per Week"
+            />
+          </ListItem>
+          <ListItem>
+            <ListItemText
+              primary={props.job.federalFunding ? "Required" : "Not Required"}
+              secondary="Federal Funding"
+            />
+          </ListItem>
+          <ListItem>
+            <ListItemText
+              primary={props.job.jobDescription}
+              secondary="Description"
+            />
+          </ListItem>
+          <ListItem>
+            <ListItemText
+              primary={props.job.requirements}
+              secondary="Requirements"
+            />
+          </ListItem>
+          <ListItem>
+            <ListItemText primary={props.job.contact} secondary="Contact" />
+          </ListItem>
+          <ListItem>
+            <ListItemText primary={props.job.email} secondary="Email" />
+          </ListItem>
+          <ListItem>
+            <ListItemText primary={props.job.phone} secondary="Phone" />
+          </ListItem>
+        </List>
+      </Dialog>
     </Card>
   );
 }
