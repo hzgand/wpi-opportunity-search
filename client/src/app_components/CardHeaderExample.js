@@ -15,6 +15,7 @@ import CardActionArea from "@mui/material/CardActionArea";
 import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import ApartmentIcon from "@mui/icons-material/Apartment";
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
 
 const config = {
   iconPadding: "0.5rem",
@@ -107,13 +108,12 @@ export default function ImgMediaCard(props) {
                     color="textSecondary"
                     component="p"
                   >
-                    <Box sx={{ display: "flex", flexDirection: "row" }}>
-                      <AssuredWorkloadIcon
-                        sx={{ paddingRight: config.iconPadding }}
-                      />
+                    <Box>
                       {props.job.federalFunding
-                        ? "Work Study Required"
-                        : "Work Study Not Required"}
+                        ? <Box sx={{ display: "flex", flexDirection: "row" }}><AssuredWorkloadIcon
+                          sx={{ paddingRight: config.iconPadding }}
+                        /> Federal Work Study Required</Box>
+                        : ""}
                     </Box>
                   </Typography>
                   <Typography
@@ -122,11 +122,14 @@ export default function ImgMediaCard(props) {
                     component="p"
                   >
                     {" "}
-                    <Box sx={{ display: "flex", flexDirection: "row" }}>
-                      <CalendarMonthIcon
+                    <Box>
+                      {props.job.jobType === "Summer"
+                        ? <Box sx={{ display: "flex", flexDirection: "row" }}><WbSunnyIcon
+                          sx={{ paddingRight: config.iconPadding }}
+                        /> Summer</Box>
+                        : <Box sx={{ display: "flex", flexDirection: "row" }}><CalendarMonthIcon
                         sx={{ paddingRight: config.iconPadding }}
-                      ></CalendarMonthIcon>
-                      {props.job.jobType}
+                      /> Academic Year</Box>}
                     </Box>
                   </Typography>
                   <Typography

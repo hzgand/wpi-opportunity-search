@@ -10,10 +10,9 @@ class CardList extends React.Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:4000/api/jobs")
-      .then((response) => {
-        response.json();
-      })
+    let jobs = [];
+    fetch("http://localhost:3000/api/jobs")
+      .then(response => response.json())
       .then((data) => {
         this.setState({ jobs: data });
       });
