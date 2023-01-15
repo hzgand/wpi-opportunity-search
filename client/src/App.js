@@ -4,6 +4,7 @@ import TestDivider from "./app_components/ListDivider";
 import JobCard from "./app_components/JobCard";
 import CardHeaderExample from "./app_components/CardHeaderExample";
 import JobCardNew from "./app_components/JobCardNew";
+import CardList from "./app_components/CardList";
 
 const testJob = {
   _id: "63c34bfc748a33ce2823a7af",
@@ -26,15 +27,7 @@ const testJob = {
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        {/* <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-        /> */}
-        <CardHeaderExample job={testJob} />
-        {/* <JobCardNew job={testJob} /> */}
-        {/* <JobCard job={testJob} /> */}
-      </header>
+      <CardList />
     </div>
   );
 }
