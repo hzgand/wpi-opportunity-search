@@ -4,6 +4,7 @@ import CardHeaderExample from "./CardHeaderExample";
 import Box from "@mui/material/Box";
 import ListItem from "@mui/material/ListItem";
 import LinearProgress from "@mui/material/LinearProgress";
+import SnackBar from "@mui/material/Snackbar";
 
 const toQueryString = (searchParameters) => {
   return new URLSearchParams(searchParameters).toString();
@@ -12,14 +13,14 @@ const toQueryString = (searchParameters) => {
 class CardList extends React.Component {
   constructor() {
     super();
-    this.state = { jobs: [], doneLoading: false };
+    this.state = { jobs: [], doneLoading: false, snackBarOpen: false };
   }
 
   componentDidMount() {
     fetch("http://localhost:3000/api/jobs")
       .then((response) => response.json())
       .then((data) => {
-        this.setState({ jobs: data, doneLoading: true });
+        this.setState({ jobs: data, doneLoading: true, snackBarOpen: true });
       });
   }
 
@@ -32,18 +33,32 @@ class CardList extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (JSON.stringify(prevProps.searchParameters) !== JSON.stringify(this.props.searchParameters)) {
-      this.setState({ jobs: [], doneLoading: false });
+      this.setState({ jobs: [], doneLoading: false, snackBarOpen: false });
       fetch(`http://localhost:3000/api/jobs?${toQueryString(this.props.searchParameters)}`)
         .then((response) => response.json())
         .then((data) => {
-          this.setState({ jobs: data, doneLoading: true });
+          this.setState({ jobs: data, doneLoading: true, snackBarOpen: true });
         });
     }
+  }
+
+  handleSnackBarClose(event, reason) {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    this.setState({snackBarOpen: false});
   }
 
   render() {
     return (
       <Box>
+        <SnackBar
+        open={this.state.snackBarOpen}
+        autoHideDuration={4000}
+        onClose={this.handleSnackBarClose.bind(this)}
+        message={this.state.jobs.length == 1 ? `${this.state.jobs.length} job found` : `${this.state.jobs.length} jobs found`}
+      />
         {this.state.doneLoading ? (
           this.state.jobs.map((jobItem) => {
             return (
