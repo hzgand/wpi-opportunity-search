@@ -57,7 +57,7 @@ class CardList extends React.Component {
         open={this.state.snackBarOpen}
         autoHideDuration={4000}
         onClose={this.handleSnackBarClose.bind(this)}
-        message={this.state.jobs.length == 1 ? `${this.state.jobs.length} job found` : `${this.state.jobs.length} jobs found`}
+        message={this.state.doneLoading ? (this.state.jobs.length == 1 ? `${this.state.jobs.length} job found` : `${this.state.jobs.length} jobs found`) : 'Loading...'}
       />
         {this.state.doneLoading ? (
           this.state.jobs.map((jobItem) => {
