@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/hzgand/wpi-opportunity-search#readme",
   "dependencies": {
+    "axios": "^1.2.3",
+    "cheerio": "^1.0.0-rc.12",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",

@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const jobSchema = new Schema({
+    _id: Number,
     jobType: {
         type: String,
         required: true
@@ -35,8 +36,7 @@ const jobSchema = new Schema({
         required: true
     },
     requirements: {
-        type: String,
-        required: true
+        type: String
     },
     contact: {
         type: String,
@@ -50,6 +50,9 @@ const jobSchema = new Schema({
         type: String,
         required: true
     }
+}, 
+{ 
+    timestamps: true 
 });
 
 jobSchema.index({positionTitle: 'text', jobDescription: 'text'});
