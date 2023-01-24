@@ -262,7 +262,7 @@ export default function ImgMediaCard(props) {
           </ListItem>
           <ListItem>
             <ListItemText
-              primary={props.job.requirements}
+              primary={props.job.requirements ?? "N/A"}
               secondary="Requirements"
             />
           </ListItem>
