@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 // import {makeStyles } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -73,9 +74,12 @@ export default function ImgMediaCard(props) {
                 width: 1,
               }}
             >
-              <Box>
+              <Box sx={{display: 'flex', flexDirection: 'row'}}>
                 <Typography gutterBottom variant="h5" component="h2">
                   {props.job.positionTitle}
+                </Typography>
+                <Typography gutterBottom variant="subtitle2" component="h4" sx={{marginLeft: 'auto'}}>
+                  {moment(props.job.updatedAt).fromNow()}
                 </Typography>
               </Box>
               <Box
