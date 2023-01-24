@@ -28,7 +28,8 @@
     "express": "^4.18.2",
     "express-jwt": "^8.3.0",
     "jsonwebtoken": "^9.0.0",
-    "mongoose": "^6.8.3"
+    "mongoose": "^6.8.3",
+    "node-cron": "^3.0.2"
   },
   "devDependencies": {
     "concurrently": "^7.6.0",
