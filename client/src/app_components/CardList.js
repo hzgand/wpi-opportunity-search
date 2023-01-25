@@ -1,6 +1,6 @@
 // import "./App.css";
 import React from "react";
-import CardHeaderExample from "./CardHeaderExample";
+import JobCard from "./JobCard";
 import Box from "@mui/material/Box";
 import ListItem from "@mui/material/ListItem";
 import LinearProgress from "@mui/material/LinearProgress";
@@ -63,7 +63,7 @@ class CardList extends React.Component {
           this.state.jobs.map((jobItem) => {
             return (
               <ListItem key={jobItem._id}>
-                <CardHeaderExample job={jobItem} />
+                <JobCard job={jobItem} />
               </ListItem>
             );
           })

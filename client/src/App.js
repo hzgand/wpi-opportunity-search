@@ -6,7 +6,7 @@ import CardList from "./app_components/CardList";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import JobAddForm from "./app_components/JobAddForm";
-import SearchBar from "./app_components/NavBar";
+import SearchBar from "./app_components/SearchBar";
 
 function App() {
   const [open, setOpen] = React.useState(false);
