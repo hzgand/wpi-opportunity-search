@@ -5,12 +5,10 @@ import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Typography, Box } from "@mui/material";
 import AssuredWorkloadIcon from "@mui/icons-material/AssuredWorkload";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import EmailIcon from "@mui/icons-material/Email";
-import ShareIcon from "@mui/icons-material/Share";
 import CardContent from "@mui/material/CardContent";
 import CardActionArea from "@mui/material/CardActionArea";
 import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
@@ -21,12 +19,10 @@ import Dialog from "@mui/material/Dialog";
 import ListItemText from "@mui/material/ListItemText";
 import ListItem from "@mui/material/ListItem";
 import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
-import Button from "@mui/material/Button";
 
 const config = {
   iconPadding: "0.5rem",
