@@ -95,7 +95,7 @@ export default function JobCard(props) {
                   <Typography
                     variant="body2"
                     color="textSecondary"
-                    component="p"
+                    component="div"
                   >
                     <Box sx={{ display: "flex", flexDirection: "row" }}>
                       <ApartmentIcon
@@ -107,7 +107,7 @@ export default function JobCard(props) {
                   <Typography
                     variant="body2"
                     color="textSecondary"
-                    component="p"
+                    component="div"
                   >
                     <Box sx={{ display: "flex", flexDirection: "row" }}>
                       <LocationOnIcon
@@ -119,7 +119,7 @@ export default function JobCard(props) {
                   <Typography
                     variant="body2"
                     color="textSecondary"
-                    component="p"
+                    component="div"
                   >
                     <Box sx={{ display: "flex", flexDirection: "row" }}>
                       <EmailIcon
@@ -133,7 +133,7 @@ export default function JobCard(props) {
                   <Typography
                     variant="body2"
                     color="textSecondary"
-                    component="p"
+                    component="div"
                   >
                     <Box>
                       {props.job.federalFunding ? (
@@ -151,7 +151,7 @@ export default function JobCard(props) {
                   <Typography
                     variant="body2"
                     color="textSecondary"
-                    component="p"
+                    component="div"
                   >
                     {" "}
                     <Box>
@@ -175,7 +175,7 @@ export default function JobCard(props) {
                   <Typography
                     variant="body2"
                     color="textSecondary"
-                    component="p"
+                    component="div"
                   >
                     <Box sx={{ display: "flex", flexDirection: "row" }}>
                       <QueryBuilderIcon

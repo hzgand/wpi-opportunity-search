@@ -127,4 +127,15 @@ const deleteJob = (req, res, next) => {
     });
 };
 
-module.exports = { findJobById, findJob, findAllJobs };
+const findAllDepartments = (req, res) => {
+    Job.distinct('department', function(err, result) {
+        if (err) {
+            return res.status(400).json({
+                error: "Could not fetch departments"
+            });
+        }
+        res.json(result);
+    });
+};
+
+module.exports = { findJobById, findJob, findAllJobs, findAllDepartments };

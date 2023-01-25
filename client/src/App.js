@@ -14,6 +14,7 @@ function App() {
   const [searchJobType, setSearchJobType] = React.useState("");
   const [searchMinHour, setSearchMinHour] = React.useState(-1);
   const [searchMaxHour, setSearchMaxHour] = React.useState(-1);
+  const [department, setDepartment] = React.useState("");
   const [searchParameters, setSearchParameters] = React.useState({});
 
   const onSearchSubmit = () => {
@@ -22,6 +23,7 @@ function App() {
     if(searchJobType && searchJobType !== "All") searchParams["jobtype"] = searchJobType;
     if(searchMinHour && searchMinHour !== -1) searchParams['hoursgte'] = searchMinHour;
     if(searchMaxHour && searchMaxHour !== -1) searchParams['hourslte'] = searchMaxHour;
+    if(department) searchParams["department"] = department;
     setSearchParameters(searchParams);
   };
 
@@ -34,11 +36,15 @@ function App() {
   }
 
   const onMinHourUpdate = (e) => {
-    setSearchMinHour(e.target.value)
+    setSearchMinHour(e.target.value);
   }
 
   const onMaxHourUpdate = (e) => {
-    setSearchMaxHour(e.target.value)
+    setSearchMaxHour(e.target.value);
+  }
+
+  const onDepartmentUpdate = (e) => {
+    setDepartment(e.target.value);
   }
 
   const handleClickOpen = () => {
@@ -57,6 +63,7 @@ function App() {
           onJobTypeUpdate={onJobTypeUpdate}
           onMinHourUpdate={onMinHourUpdate}
           onMaxHourUpdate={onMaxHourUpdate}
+          onDepartmentUpdate={onDepartmentUpdate}
           onSearchSubmit={onSearchSubmit}
         />
         <CardList searchParameters={searchParameters} />
