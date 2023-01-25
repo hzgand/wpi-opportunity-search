@@ -223,6 +223,16 @@ export default function ImgMediaCard(props) {
           </ListItem>
           <ListItem>
             <ListItemText
+              primary={moment(props.job.createdAt).format('MMMM Do, YYYY')}
+              secondary="Added to Database"
+            />
+            <ListItemText
+              primary={moment(props.job.updatedAt).format('MMMM Do, YYYY')}
+              secondary="Last Updated"
+            />
+          </ListItem>
+          <ListItem>
+            <ListItemText
               primary={props.job.jobType}
               secondary="Employment Period"
             />
@@ -239,7 +249,7 @@ export default function ImgMediaCard(props) {
           <ListItem>
             <ListItemText
               primary={props.job.studentsRequired}
-              secondary="# of Students Required"
+              secondary="Number of Students Required"
             />
           </ListItem>
           <ListItem>
