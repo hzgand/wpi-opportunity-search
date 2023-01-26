@@ -17,7 +17,7 @@ class CardList extends React.Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:3000/api/jobs")
+    fetch("/api/jobs")
       .then((response) => response.json())
       .then((data) => {
         this.setState({ jobs: data, doneLoading: true, snackBarOpen: true });
@@ -34,7 +34,7 @@ class CardList extends React.Component {
   componentDidUpdate(prevProps) {
     if (JSON.stringify(prevProps.searchParameters) !== JSON.stringify(this.props.searchParameters)) {
       this.setState({ jobs: [], doneLoading: false, snackBarOpen: false });
-      fetch(`http://localhost:3000/api/jobs?${toQueryString(this.props.searchParameters)}`)
+      fetch(`/api/jobs?${toQueryString(this.props.searchParameters)}`)
         .then((response) => response.json())
         .then((data) => {
           this.setState({ jobs: data, doneLoading: true, snackBarOpen: true });
