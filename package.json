@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon index.js",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "start": "npm run server"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,10 @@
     "url": "https://github.com/hzgand/wpi-opportunity-search/issues"
   },
   "homepage": "https://github.com/hzgand/wpi-opportunity-search#readme",
+  "engines": {
+    "node": ">=16.18.0",
+    "npm": ">=8.19.2"
+  },
   "dependencies": {
     "axios": "^1.2.3",
     "cheerio": "^1.0.0-rc.12",
