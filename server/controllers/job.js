@@ -2,6 +2,8 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const Job = require('../models/job');
 
+const { syncJobsDatabase } = require('../scheduledFunctions/syncJobs');
+
 const addJob = (req, res, next) => {
     const job = new Job(req.body);
     job.save((err, result) => {
@@ -138,4 +140,14 @@ const findAllDepartments = (req, res) => {
     });
 };
 
-module.exports = { findJobById, findJob, findAllJobs, findAllDepartments };
+const refreshJobs = async (req, res) => {
+    if(process.env.JOBSYNC_AUTH !== undefined && req.get("Authorization") === process.env.JOBSYNC_AUTH) {
+        await syncJobsDatabase(req, res);
+    } else {
+        res.status(400).json({
+            error: "Invalid Authorization"
+        });
+    }
+};
+
+module.exports = { findJobById, findJob, findAllJobs, findAllDepartments, refreshJobs };

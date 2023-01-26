@@ -7,11 +7,7 @@ const path = require('path');
 
 const jobRoutes = require("./server/routes/job");
 
-const scheduledFunctions = require('./server/scheduledFunctions/syncJobs');
-
 require('./server/config/dbConnection');
-
-scheduledFunctions.initScheduledJobs();
 
 const app = express();
 

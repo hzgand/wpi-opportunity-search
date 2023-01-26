@@ -17,7 +17,7 @@ const getJobTypeFromURL = (url) => {
     return "Unknown";
 }
 
-const refreshJobs = async () => {
+const syncJobsDatabase = async (req, res) => {
     console.log("Attempting to sync job database...");
     try {
         const jobURLs = [];
@@ -140,22 +140,31 @@ const refreshJobs = async () => {
                     }
                 }
             }
-
-            console.log(`Database sync complete. ${numberJobsNew} jobs added, ${numberJobsUpdated} jobs updated, ${numberJobsUnchanged} jobs unchanged, and ${numberJobsDeleted} jobs deleted.`);
+            let returnString = `Database sync complete. ${numberJobsNew} jobs added, ${numberJobsUpdated} jobs updated, ${numberJobsUnchanged} jobs unchanged, and ${numberJobsDeleted} jobs deleted.`;
+            console.log(returnString);
+            res.status(200).json({
+                message: returnString
+            });
 
         }).select("-createdAt -updatedAt -__v");
 
     } catch (error) {
+        let returnString = `Error Updating Database \n ${error} \n ${error.message}`;
         console.log("Error Updating Database");
         console.log(error, error.message);
+        res.status(400).json({
+            error: returnString
+        });
     }
 
 }
 
-exports.initScheduledJobs = () => {
-  const scheduledJobFunction = CronJob.schedule("0 0,6,12,18 * * *", () => {
-    refreshJobs();
-  });
+// exports.initScheduledJobs = () => {
+//   const scheduledJobFunction = CronJob.schedule("0 0,6,12,18 * * *", () => {
+//     syncJobsDatabase();
+//   });
 
-  scheduledJobFunction.start();
-}
+//   scheduledJobFunction.start();
+// }
+
+module.exports = { syncJobsDatabase };
