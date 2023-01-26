@@ -8,7 +8,7 @@
     "server": "nodemon index.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "start": "npm run server"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
