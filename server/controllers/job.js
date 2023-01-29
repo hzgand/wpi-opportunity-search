@@ -145,6 +145,7 @@ const refreshJobs = async (req, res) => {
         await syncJobsDatabase(req, res);
     } else {
         res.status(400).json({
+            date: new Date(),
             error: "Invalid Authorization"
         });
     }

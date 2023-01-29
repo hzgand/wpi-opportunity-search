@@ -143,6 +143,7 @@ const syncJobsDatabase = async (req, res) => {
             let returnString = `Database sync complete. ${numberJobsNew} jobs added, ${numberJobsUpdated} jobs updated, ${numberJobsUnchanged} jobs unchanged, and ${numberJobsDeleted} jobs deleted.`;
             console.log(returnString);
             res.status(200).json({
+                date: new Date(),
                 message: returnString
             });
 
@@ -153,6 +154,7 @@ const syncJobsDatabase = async (req, res) => {
         console.log("Error Updating Database");
         console.log(error, error.message);
         res.status(400).json({
+            date: new Date(),
             error: returnString
         });
     }
