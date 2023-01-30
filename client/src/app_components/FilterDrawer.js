@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, List, ListItem, Drawer, TextField, InputAdornment, FormControl, InputLabel, Select, MenuItem, Typography, Button, Slider, Divider } from "@mui/material";
+import { Box, List, ListItem, Drawer, TextField, InputAdornment, FormControl, InputLabel, Select, MenuItem, Typography, Button, Slider, Divider, FormControlLabel, Checkbox } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 
 const jobType = [
@@ -109,6 +109,12 @@ export default function FilterDrawer(props) {
                             getAriaValueText={() => "Hours"}
                         />
                     </Box>
+                </ListItem>
+
+                <Divider />
+
+                <ListItem>
+                <FormControlLabel control={<Checkbox onChange={props.onFundOptionalUpdate}/>} label="Federal Funding Optional" />
                 </ListItem>
 
                 <Divider />

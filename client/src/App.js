@@ -12,6 +12,7 @@ function App() {
   const [searchJobType, setSearchJobType] = React.useState("");
   const [searchHourRange, setSearchHourRange] = React.useState([0, 100]);
   const [department, setDepartment] = React.useState("");
+  const [searchFundOptional, setSearchFundOptional] = React.useState(false);
   const [searchParameters, setSearchParameters] = React.useState({});
 
   const onSearchSubmit = () => {
@@ -24,6 +25,7 @@ function App() {
     if (searchMinHour !== undefined && searchMinHour !== -1) searchParams['hoursgte'] = searchMinHour;
     if (searchMaxHour !== undefined && searchMaxHour !== -1) searchParams['hourslte'] = searchMaxHour;
     if (department) searchParams["department"] = department;
+    if (searchFundOptional === true) searchParams["federalfunding"] = false;
     handleDrawerToggle();
     setSearchParameters(searchParams);
   };
@@ -42,6 +44,10 @@ function App() {
 
   const onDepartmentUpdate = (e) => {
     setDepartment(e.target.value);
+  }
+
+  const onFundOptionalUpdate = (e) => {
+    setSearchFundOptional(e.target.checked);
   }
   // -------------
 
@@ -88,13 +94,15 @@ function App() {
           drawerWidth={drawerWidth}
           mobileOpen={mobileOpen}
           handleDrawerToggle={handleDrawerToggle}
-          onSearchUpdate={onSearchUpdate}
-          onJobTypeUpdate={onJobTypeUpdate}
 
-          onSearchHourRangeUpdate={onSearchHourRangeUpdate}
           searchHourRange={searchHourRange}
 
+          onSearchUpdate={onSearchUpdate}
+          onJobTypeUpdate={onJobTypeUpdate}
+          onSearchHourRangeUpdate={onSearchHourRangeUpdate}
           onDepartmentUpdate={onDepartmentUpdate}
+          onFundOptionalUpdate={onFundOptionalUpdate}
+
           onSearchSubmit={onSearchSubmit}
         />
 
