@@ -44,7 +44,7 @@ export default function JobCard(props) {
   };
 
   return (
-    <Card sx={{ width: 0.6, margin: "auto" }}>
+    <Card sx={{ width: 1, margin: "auto" }}>
       <CardActionArea onClick={handleClickOpen}>
         <Box sx={{ display: "flex", flexDirection: "row" }}>
           <CardHeader

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import AppBar from "@mui/material/AppBar";
-import { Toolbar, TextField, InputAdornment, Button, Box, MenuItem, Typography, Select, FormControl, InputLabel } from "@mui/material";
+import { Box, List, ListItem, Drawer, TextField, InputAdornment, FormControl, InputLabel, Select, MenuItem, Typography, Button, Slider, Divider } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 
 const jobType = [
@@ -12,7 +11,11 @@ const jobType = [
     },
 ];
 
-export default function SearchBar(props) {
+export default function FilterDrawer(props) {
+
+    const { window } = props;
+
+    const container = window !== undefined ? () => window().document.body : undefined;
 
     const [departments, setDepartmenets] = useState([]);
 
@@ -24,10 +27,10 @@ export default function SearchBar(props) {
             });
     }, []);
 
-    return (
-        <AppBar position="sticky" style={{ background: "white" }}>
-            <Toolbar>
-                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+    const drawer = (
+        <div>
+            <List>
+                <ListItem>
                     <TextField
                         id="input-search"
                         placeholder="Search"
@@ -41,7 +44,12 @@ export default function SearchBar(props) {
                         variant="outlined"
                         onChange={props.onSearchUpdate}
                     />
-                    <FormControl sx={{ m: 1, minWidth: 200 }}>
+                </ListItem>
+
+                <Divider />
+
+                <ListItem>
+                    <FormControl sx={{ minWidth: 200 }}>
                         <InputLabel id="jobType-simple-select-helper-label">Employment Period</InputLabel>
                         <Select
                             labelId="jobType-simple-select-helper-label"
@@ -61,8 +69,12 @@ export default function SearchBar(props) {
                                 }) : ""}
                         </Select>
                     </FormControl>
+                </ListItem>
 
-                    <FormControl sx={{ m: 1, minWidth: 150 }}>
+                <Divider />
+
+                <ListItem>
+                    <FormControl sx={{ minWidth: 150 }}>
                         <InputLabel id="department-simple-select-helper-label">Department</InputLabel>
                         <Select
                             labelId="department-simple-select-helper-label"
@@ -82,36 +94,64 @@ export default function SearchBar(props) {
                                 }) : ""}
                         </Select>
                     </FormControl>
+                </ListItem>
 
-                    &nbsp;&nbsp;&nbsp;
+                <Divider />
 
-                    <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                        <TextField
-                            id="input-hours-gte"
-                            placeholder="min"
-                            variant="outlined"
-                            size="small"
-                            sx={{ width: 0.25 }}
-                            onChange={props.onMinHourUpdate}
-                        />
-                        <Typography
-                            sx={{ color: 'black', height: 0.5 }}
-                            variant="body1"
-                            component="h4">
-                            &nbsp;&lt; Hours / Week &lt;&nbsp;</Typography>
-                        <TextField
-                            id="input-hours-gte"
-                            placeholder="max"
-                            variant="outlined"
-                            size="small"
-                            sx={{ width: 0.25 }}
-                            onChange={props.onMaxHourUpdate}
+                <ListItem>
+                    <Box>
+                        <Typography>Hours per Week</Typography>
+                        <Slider
+                            getAriaLabel={() => 'Hours per Week'}
+                            value={props.searchHourRange}
+                            onChange={props.onSearchHourRangeUpdate}
+                            valueLabelDisplay="auto"
+                            getAriaValueText={() => "Hours"}
                         />
                     </Box>
+                </ListItem>
 
-                    <Button variant="outlined" onClick={props.onSearchSubmit}>Submit</Button>
-                </Box>
-            </Toolbar>
-        </AppBar>
+                <Divider />
+
+                <ListItem>
+                    <Button variant="outlined" onClick={props.onSearchSubmit}>Apply Filters</Button>
+                </ListItem>
+            </List>
+        </div>
+    );
+
+    return (
+        <Box
+            component="nav"
+            sx={{ width: { sm: props.drawerWidth }, flexShrink: { sm: 0 } }}
+            aria-label="mailbox folders"
+        >
+            {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+            <Drawer
+                container={container}
+                variant="temporary"
+                open={props.mobileOpen}
+                onClose={props.handleDrawerToggle}
+                ModalProps={{
+                    keepMounted: true, // Better open performance on mobile.
+                }}
+                sx={{
+                    display: { xs: 'block', sm: 'none' },
+                    '& .MuiDrawer-paper': { boxSizing: 'border-box', width: props.drawerWidth },
+                }}
+            >
+                {drawer}
+            </Drawer>
+            <Drawer
+                variant="permanent"
+                sx={{
+                    display: { xs: 'none', sm: 'block' },
+                    '& .MuiDrawer-paper': { boxSizing: 'border-box', width: props.drawerWidth },
+                }}
+                open
+            >
+                {drawer}
+            </Drawer>
+        </Box>
     );
 }

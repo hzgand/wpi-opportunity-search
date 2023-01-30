@@ -1,29 +1,30 @@
 // import "./App.css";
 import React from "react";
-import Box from "@mui/material/Box";
 import CardList from "./app_components/CardList";
 
-import Fab from "@mui/material/Fab";
-import AddIcon from "@mui/icons-material/Add";
-import JobAddForm from "./app_components/JobAddForm";
-import SearchBar from "./app_components/SearchBar";
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import { Box, AppBar, Toolbar, Typography, IconButton, CssBaseline } from "@mui/material";
+import FilterDrawer from "./app_components/FilterDrawer";
 
 function App() {
-  const [open, setOpen] = React.useState(false);
+  // --- SEARCH ---  
   const [searchString, setSearchString] = React.useState("");
   const [searchJobType, setSearchJobType] = React.useState("");
-  const [searchMinHour, setSearchMinHour] = React.useState(-1);
-  const [searchMaxHour, setSearchMaxHour] = React.useState(-1);
+  const [searchHourRange, setSearchHourRange] = React.useState([0, 100]);
   const [department, setDepartment] = React.useState("");
   const [searchParameters, setSearchParameters] = React.useState({});
 
   const onSearchSubmit = () => {
+    let searchMinHour = searchHourRange[0];
+    let searchMaxHour = searchHourRange[1];
+
     let searchParams = {};
-    if(searchString) searchParams["q"] = searchString;
-    if(searchJobType && searchJobType !== "All") searchParams["jobtype"] = searchJobType;
-    if(searchMinHour && searchMinHour !== -1) searchParams['hoursgte'] = searchMinHour;
-    if(searchMaxHour && searchMaxHour !== -1) searchParams['hourslte'] = searchMaxHour;
-    if(department) searchParams["department"] = department;
+    if (searchString) searchParams["q"] = searchString;
+    if (searchJobType && searchJobType !== "All") searchParams["jobtype"] = searchJobType;
+    if (searchMinHour !== undefined && searchMinHour !== -1) searchParams['hoursgte'] = searchMinHour;
+    if (searchMaxHour !== undefined && searchMaxHour !== -1) searchParams['hourslte'] = searchMaxHour;
+    if (department) searchParams["department"] = department;
+    handleDrawerToggle();
     setSearchParameters(searchParams);
   };
 
@@ -35,47 +36,83 @@ function App() {
     setSearchJobType(e.target.value);
   }
 
-  const onMinHourUpdate = (e) => {
-    setSearchMinHour(e.target.value);
-  }
-
-  const onMaxHourUpdate = (e) => {
-    setSearchMaxHour(e.target.value);
+  const onSearchHourRangeUpdate = (e, newValue) => {
+    setSearchHourRange(newValue);
   }
 
   const onDepartmentUpdate = (e) => {
     setDepartment(e.target.value);
   }
+  // -------------
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  // --- DRAWER ---
+
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const drawerWidth = 240;
+
+  // ----------
 
   return (
     <div className="App">
-      <Box>
-        <SearchBar
+      <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
+        <AppBar
+          position="fixed"
+          sx={{
+            width: { sm: `calc(100% - ${drawerWidth}px)` },
+            ml: { sm: `${drawerWidth}px` },
+          }}
+        >
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ mr: 2, display: { sm: 'none' } }}
+            >
+              <FilterAltIcon />
+            </IconButton>
+            <Typography variant="h6" noWrap component="div">
+              WPI Opportunity Search
+            </Typography>
+          </Toolbar>
+        </AppBar>
+
+        <FilterDrawer
+          drawerWidth={drawerWidth}
+          mobileOpen={mobileOpen}
+          handleDrawerToggle={handleDrawerToggle}
           onSearchUpdate={onSearchUpdate}
           onJobTypeUpdate={onJobTypeUpdate}
-          onMinHourUpdate={onMinHourUpdate}
-          onMaxHourUpdate={onMaxHourUpdate}
+
+          onSearchHourRangeUpdate={onSearchHourRangeUpdate}
+          searchHourRange={searchHourRange}
+
           onDepartmentUpdate={onDepartmentUpdate}
           onSearchSubmit={onSearchSubmit}
         />
-        <CardList searchParameters={searchParameters} />
-        <Fab
-          color="primary"
-          aria-label="add"
-          sx={{ position: "fixed", bottom: "1rem", right: "1rem" }}
-          onClick={handleClickOpen}
+
+        <Box
+          sx={{
+            mb: 2,
+            display: "flex",
+            flexGrow: 1,
+            flexDirection: "column",
+            height: "100vh",
+            overflow: "hidden",
+            overflowY: "scroll",
+          }}
         >
-          <AddIcon />
-        </Fab>
-        <JobAddForm open={open} onClose={handleClose}></JobAddForm>
+          <Toolbar />
+          <CardList searchParameters={searchParameters} />
+        </Box>
+
       </Box>
     </div>
   );
