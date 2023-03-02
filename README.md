@@ -23,3 +23,10 @@ https://wpi-opportunity-search.glitch.me
 ## Developers
 - [hzgand](https://github.com/hzgand)
 - [mahirsowad3](https://github.com/mahirsowad3)
+
+## Screenshots
+![image](https://user-images.githubusercontent.com/101759753/222592508-fee69fe2-ed1e-4ef6-a1cf-3c70c363f5dd.png)
+
+![image](https://user-images.githubusercontent.com/101759753/222592685-93eed980-c219-4af3-b68f-0f2a270dc54b.png)
+
+![image](https://user-images.githubusercontent.com/101759753/222592801-2dd9fa78-c574-47f1-809d-82ccf7d7c4b7.png)
